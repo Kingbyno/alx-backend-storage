@@ -2,9 +2,8 @@
 -- id, email, name country enumeration US,Co, Tn DEFAULT us
 
 CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT
     email VARCHAR(255) NOT NULL UNIQUE,
     name VARCHAR(255),
-    country VARCHAR(2) NOT NULL,
-    CHECK (country IN ('US', 'CO', 'TN'))
+    country ENUM('US', 'CO', 'TN' ) DEFAULT 'US' NOT NULL
 );
