@@ -1,19 +1,5 @@
--- SQL script that creates a function SafeDiv that divides
--- (and returns) the first by the second number or returns
--- 0 if the second number is equal to 0.
-DELIMITER $$ ;
-CREATE FUNCTION SafeDiv(
-	a INT,
-	b INT
-)
-RETURNS FLOAT
-DETERMINISTIC
-BEGIN
-	DECLARE result FLOAT;
-	IF b = 0 THEN
-		RETURN 0;
-        END IF;
-        SET result = (a * 1.0) / b;
-        RETURN result;
-END;$$
-DELIMITER ;
+-- SQL script that creates a view need_meeting that lists
+-- all students that have a score under 80 (strict)
+-- and no last_meeting or more than 1 month.
+CREATE VIEW need_meeting AS SELECT name from students WHERE score < 80
+AND (last_meeting IS NULL OR last_meeting < DATE(CURDATE() - INTERVAL 1 MONTH));
